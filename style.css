@@ -41,3 +41,31 @@ body {
   left: 50px;
   transition: max-width ease-in 1s;
 }
+
+#error {
+  text-align: center;
+  margin-top: 10px;
+}
+.invisi {
+  display: none;
+}
+.visiable {
+  display: block;
+  position: relative;
+  left: 110px;
+  background-color: #f0f0f09c;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: fit-content;
+}
+.visiable a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.visiable a:hover {
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
+.visiable:hover {
+  background-color: #f0f0f0;
+}

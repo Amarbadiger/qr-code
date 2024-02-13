@@ -19,6 +19,9 @@
       <div class="imgBox">
         <img src="" id="img" />
       </div>
+      <div id="download" class="invisi">
+        <a href="" download="qr_image.png" id="link">Download</a>
+      </div>
       <button id="btn" onclick="generateQr()">Generate</button>
       <p id="error"></p>
     </div>
@@ -26,17 +29,36 @@
       let err = document.querySelector("#error");
       let input = document.querySelector("#qr");
       let img = document.querySelector("#img");
+      let download = document.querySelector("#download");
+      let link = document.querySelector("#link");
       const URL =
         "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
+
       input.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
           generateQr();
         }
       });
+
       function generateQr() {
         if (input.value.length > 0) {
-          console.log(input.value);
-          img.src = URL + input.value;
+          let inputUrl = URL + input.value;
+          img.src = inputUrl;
+
+          fetch(inputUrl)
+            .then((response) => response.blob())
+            .then((blob) => {
+              console.log(blob);
+              let url = window.URL.createObjectURL(blob);
+              link.href = url;
+            })
+            .catch((error) => {
+              console.error("Error fetching image:", error);
+            });
+
+          setTimeout(function () {
+            download.classList.add("visiable");
+          }, 1000);
         } else {
           err.innerText = "Please Enter the URL";
           err.style.color = "red";
